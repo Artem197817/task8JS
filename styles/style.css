@@ -58,7 +58,7 @@ body {
 }
 
 .container-img {
-    padding: 254px 46px 530px 1px;
+    padding: 254px 0px 0px 1px;
     max-width: 590px;
     box-sizing: border-box;
     position: relative;
@@ -98,7 +98,7 @@ body {
 
 .reg-form {
     outline: none;
-    background: transparent;
+    background: #FFFFFB !important;
     border: none;
     border-bottom: 1px solid #C6C6C4;
     padding: 0 5px;
