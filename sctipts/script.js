@@ -137,7 +137,7 @@ window.onload = function () {
 
 
             if (!username) {
-                myAlertMessage('Пожалуйста, введите имя пользователя.');
+                myAlertMessage('Пожалуйста, введите имя.');
                 return;
             }
 
