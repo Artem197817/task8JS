@@ -151,4 +151,4 @@ window.onload = function () {
     }
 }
 
-console.log('hello new world')
+console.log('hello world')
