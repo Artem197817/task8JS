@@ -166,7 +166,7 @@ body {
 .alert-button {
     background: #DD3142;
     border: none;
-    border-radius: 10px;
+    border-radius: 11px;
     color: white;
     box-sizing: border-box;
     display: flex;
