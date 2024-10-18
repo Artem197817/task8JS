@@ -17,7 +17,7 @@ window.onload = function () {
             return false;
         }
     }
-    //В поле "Your username" запретите вводить точки и запятые.
+
 
     usernameElement.addEventListener('input', function () {
         this.value = this.value.replace(/[.,]/g, '');

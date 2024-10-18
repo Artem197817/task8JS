@@ -43,7 +43,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    max-width: 590px;
+    max-width: 589px;
     position: relative;
     z-index: 1;
     padding: 194px 41px 0 63px;
@@ -58,7 +58,7 @@ body {
 }
 
 .container-img {
-    padding: 254px 0 0 1px;
+    padding: 255px 0 0 1px;
     max-width: 590px;
     box-sizing: border-box;
     position: relative;
@@ -112,7 +112,7 @@ body {
 
 .reg-form-check {
     font-size: 16px;
-    line-height: 27px;
+    line-height: 26px;
     color: #636363;
     margin-top: 10px;
 }
@@ -123,7 +123,7 @@ body {
     border-radius: 40px;
     background: #DD3142;
     box-sizing: border-box;
-    margin: 40px 0 44px 138px;
+    margin: 40px 0 43px 138px;
     font-size: 20px;
     color: white;
     cursor: pointer;
@@ -145,7 +145,7 @@ body {
     top: 38%;
     left: calc(50% - 193px);
     width: 400px;
-    height: 200px;
+    height: 201px;
     background-image: url("../images/back.png");
     background-position: center;
     border: 1px solid #636363;
@@ -160,13 +160,13 @@ body {
 
 .logo-alert {
     margin-top: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 24px;
 }
 
 .alert-button {
     background: #DD3142;
     border: none;
-    border-radius: 10px;
+    border-radius: 11px;
     color: white;
     box-sizing: border-box;
     display: flex;

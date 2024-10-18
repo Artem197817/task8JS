@@ -1,0 +1,76 @@
+artem@Artem:~/WebstormProjects/task/task8JS$ git log
+commit 3b76847fa4163ef8472f6c66e1f88c1cbb0444ff (HEAD -> master, origin/master, dev-1)
+Author: Artem <katod1978@yandex.ru>
+Date:   Tue Oct 15 20:27:22 2024 +0700
+
+    modification script.js
+
+commit 4788f0614743b670383f6814479b6ebd112c17a3
+Author: Artem <katod1978@yandex.ru>
+Date:   Tue Oct 15 20:19:34 2024 +0700
+
+    added doc2
+
+commit 4b545a90ac4935603935e222c54295c92c15f325
+Author: Artem <katod1978@yandex.ru>
+Date:   Tue Oct 15 20:07:36 2024 +0700
+
+    added gitignore
+
+commit ca7a714cb35f19c69b017c6e83412748e0d830a1
+Author: Artem <katod1978@yandex.ru>
+Date:   Tue Oct 15 20:04:23 2024 +0700
+
+    added readme file
+
+commit b03b966643a7241ddd4c9c90f08a88f44f584bbd
+Author: Artem <katod1978@yandex.ru>
+Date:   Sun Sep 8 09:09:39 2024 +0700
+
+
+[1]+  Остановлен    git log
+artem@Artem:~/WebstormProjects/task/task8JS$ git hist
+* 3b76847 2024-10-15 | modification script.js (HEAD -> master, origin/master, dev-1) [Artem]
+* 4788f06 2024-10-15 | added doc2 [Artem]
+* 4b545a9 2024-10-15 | added gitignore [Artem]
+* ca7a714 2024-10-15 | added readme file [Artem]
+* b03b966 2024-09-08 | bug fix [Artem]
+* 3fb32ac 2024-09-08 | bug fix [Artem]
+* 7d71c85 2024-09-06 | init [Artem]
+artem@Artem:~/WebstormProjects/task/task8JS$ git log --pretty='oneline'
+3b76847fa4163ef8472f6c66e1f88c1cbb0444ff (HEAD -> master, origin/master, dev-1) modification script.js
+4788f0614743b670383f6814479b6ebd112c17a3 added doc2
+4b545a90ac4935603935e222c54295c92c15f325 added gitignore
+ca7a714cb35f19c69b017c6e83412748e0d830a1 added readme file
+b03b966643a7241ddd4c9c90f08a88f44f584bbd bug fix
+3fb32acaa5c074f107ddcf0caf322b839427fa08 bug fix
+7d71c859ce78cafdfc6b361a6b19c3dbf5bd1d8d init
+artem@Artem:~/WebstormProjects/task/task8JS$ git log --pretty='full'
+commit 3b76847fa4163ef8472f6c66e1f88c1cbb0444ff (HEAD -> master, origin/master, dev-1)
+Author: Artem <katod1978@yandex.ru>
+Commit: Artem <katod1978@yandex.ru>
+
+    modification script.js
+
+commit 4788f0614743b670383f6814479b6ebd112c17a3
+Author: Artem <katod1978@yandex.ru>
+Commit: Artem <katod1978@yandex.ru>
+
+    added doc2
+
+commit 4b545a90ac4935603935e222c54295c92c15f325
+Author: Artem <katod1978@yandex.ru>
+Commit: Artem <katod1978@yandex.ru>
+
+    added gitignore
+
+commit ca7a714cb35f19c69b017c6e83412748e0d830a1
+Author: Artem <katod1978@yandex.ru>
+Commit: Artem <katod1978@yandex.ru>
+
+    added readme file
+
+commit b03b966643a7241ddd4c9c90f08a88f44f584bbd
+Author: Artem <katod1978@yandex.ru>
+Commit: Artem <katod1978@yandex.ru>
+
