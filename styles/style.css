@@ -185,3 +185,8 @@ body {
     max-width: 370px;
     text-align: center;
 }
+.invalid-feedback{
+    font-size: 12px;
+    line-height: 20px;
+    color: #DD3142;
+}

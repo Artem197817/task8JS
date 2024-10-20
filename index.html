@@ -25,26 +25,32 @@
                 <label class="reg-form-label" for="full-name" id="full-name-label">
                     Full Name
                     <input type="text" class="reg-form" id="full-name" name="fullName">
+                    <div class="invalid-feedback"></div>
                 </label>
-                <label class="reg-form-label" for="username">
+                <label class="reg-form-label" for="username" id="username-label">
                     Your username
                     <input type="text" class="reg-form" id="username" name="username">
+                    <div class="invalid-feedback"></div>
                 </label>
                 <label class="reg-form-label" for="email" id="email-label">
                     E-mail
                     <input type="text" class="reg-form" id="email" name="Email" >
+                    <div class="invalid-feedback"></div>
                 </label>
-                <label class="reg-form-label" for="password">
+                <label class="reg-form-label" for="password" id="password-label">
                     Password
                     <input type="password" class="reg-form" id="password" name="password">
+                    <div class="invalid-feedback"></div>
                 </label>
                 <label class="reg-form-label" for="repeat-password" id="repeat-password-label">
                     Repeat Password
                     <input type="password" class="reg-form" id="repeat-password" name="repeatPassword">
+                    <div class="invalid-feedback"></div>
                 </label>
                 <label id="check-label">
-                    <input class="reg-form-check" id="reg-form-check" type="checkbox" name="agree" value="agree">
+                    <input class="reg-form-check" id="reg-form-check" type="checkbox" name="agree" value="agree" checked>
                     Agree to our Terms of Service and Privacy Statement
+                    <div class="invalid-feedback"></div>
                 </label>
                 <button type="submit" class="button" id="button">Sign Up</button>
             </form>
@@ -73,5 +79,6 @@
     </div>
 </main>
 <script src="sctipts/script.js"></script>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
 </body>
 </html>

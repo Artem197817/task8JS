@@ -1,152 +1,292 @@
 window.onload = function () {
-    const fullNameElement = document.getElementById('full-name');
-    const emailElement = document.getElementById('email');
-    const usernameElement = document.getElementById('username');
-    const passwordElement = document.getElementById('password');
-    const repeatPasswordElement = document.getElementById('repeat-password');
-    const checkBoxElement = document.getElementById('reg-form-check');
-    const myAlert = document.getElementById('my-alert');
-    const alertText = document.getElementById('alert-text');
-    const alertButton = document.getElementById('alert-button');
-    const form = document.getElementById('reg-forms');
-    const linkAccount = document.getElementById('link-account');
 
 
-    fullNameElement.onkeydown = (e) => {
-        if (!isNaN(parseInt(e.key))) {
-            return false;
+    const fullNameElement = $('#full-name');
+    const emailElement = $('#email');
+    const usernameElement = $('#username');
+    const passwordElement = $('#password');
+    const repeatPasswordElement = $('#repeat-password');
+    const checkBoxElement = $('#reg-form-check');
+    const myAlert = $('#my-alert');
+    const alertText = $('#alert-text');
+    const alertButton = $('#alert-button');
+    const form = $('#reg-forms');
+    const linkAccount = $('#link-account');
+    const titleElement = $('#form-info-title');
+    const buttonElement = $('#button');
+    const regForm = $('.reg-form');
+    const invalidFeedbackElement = $('.invalid-feedback');
+
+
+
+    fullNameElement.on('keydown', function (e) {
+        if (!isNaN(parseInt(e.key)) && e.key !== " ") {
+            e.preventDefault();
         }
-    }
-    //В поле "Your username" запретите вводить точки и запятые.
-
-    usernameElement.addEventListener('input', function () {
-        this.value = this.value.replace(/[.,]/g, '');
     });
-    checkBoxElement.addEventListener('change', function () {
-        if (checkBoxElement.checked) {
-            console.log('Согласен');
-        } else {
-            console.log('Не согласен');
-        }
-    })
 
-    form.addEventListener('submit', registerFormListener)
+    //В поле "Your username" запретите вводить точки и запятые.
+    usernameElement.on('input', function () {
+        const newValue = usernameElement.val().replace(/[.,]/g, '');
+        usernameElement.val(newValue);
+    });
+
+    form.on('submit', registerFormListener);
 
 
     function registerFormListener(event) {
         event.preventDefault();
-        const fullName = fullNameElement.value.trim();
-        const email = emailElement.value.trim();
-        const username = usernameElement.value.trim();
-        const password = passwordElement.value;
-        const repeatPassword = repeatPasswordElement.value;
-        const agree = checkBoxElement.checked;
+        const fullName = fullNameElement.val().trim();
+        const email = emailElement.val().trim();
+        const username = usernameElement.val().trim();
+        const password = passwordElement.val();
+        const repeatPassword = repeatPasswordElement.val();
+        const agree = checkBoxElement.prop('checked');
 
+        regForm.each(function () {
+            $(this).css({
+                borderColor: '#C6C6C4',
+                marginBottom: '20px'
+            });
+        });
 
+        invalidFeedbackElement.each(function () {
+            $(this).text('');
+        });
+        let hasError = false;
+
+        //Validate fullName
         if (!fullName) {
-            myAlertMessage('Пожалуйста, введите имя.');
-            return;
+            invalidMessage(fullNameElement, 'Пожалуйста, введите имя.');
+            hasError = true;
+        } else {
+            const fullNamePattern = /^[A-Za-zА-Яа-яЁё\s]+$/;
+            if (!fullNamePattern.test(fullName)) {
+                invalidMessage(fullNameElement, 'Имя может содержать только буквы и пробелы.');
+                hasError = true;
+            }
         }
+
+        // Validate userName
         if (!username) {
-            myAlertMessage('Пожалуйста, введите имя пользователя.');
-            return;
+            invalidMessage(usernameElement, 'Пожалуйста, введите имя пользователя.');
+            hasError = true;
+        } else {
+            const usernamePattern = /^[A-Za-zА-Яа-яЁё0-9_-]+$/;
+            if (!usernamePattern.test(username)) {
+                invalidMessage(usernameElement, 'Имя пользователя может содержать только буквы, цифры, символ подчеркивания и тире.');
+                hasError = true;
+            }
         }
+
+
+        // Validate email
         if (!email) {
-            myAlertMessage('Пожалуйста, введите email.');
-            return;
+            invalidMessage(emailElement, 'Пожалуйста, введите email.');
+            hasError = true;
+        } else {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                invalidMessage(emailElement, 'Пожалуйста, введите корректный адрес электронной почты.');
+                hasError = true;
+            }
         }
+
+
+        // Validate password
         if (!password) {
-            myAlertMessage('Пожалуйста, введите пароль.');
-            return;
+            invalidMessage(passwordElement, 'Пожалуйста, введите пароль.');
+            hasError = true;
+        } else if (password.length < 8) {
+            invalidMessage(passwordElement, 'Пароль должен содержать не менее 8 символов.');
+            hasError = true;
+        } else {
+            const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+            if (!passwordPattern.test(password)) {
+                invalidMessage(passwordElement, 'Пароль должен содержать хотя бы одну заглавную букву, одну цифру и один спецсимвол.');
+                hasError = true;
+            }
         }
+
+        // Validate repeat password
         if (!repeatPassword) {
-            myAlertMessage('Пожалуйста, повторите пароль.');
-            return;
+            invalidMessage(repeatPasswordElement, 'Повторите пароль.');
+            hasError = true;
+        } else if (password !== repeatPassword) {
+            invalidMessage(repeatPasswordElement, 'Пароли не совпадают.');
+            hasError = true;
         }
 
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email)) {
-            myAlertMessage('Пожалуйста, введите корректный адрес электронной почты.');
-            return;
-        }
-
-        if (password !== repeatPassword) {
-            myAlertMessage('Пароли не совпадают.');
-            return;
-        }
-        if (password.length < 8) {
-            myAlertMessage('Пароль должен быть не менее 8 символов.');
-            return;
-        }
-
+        // Check agreement with terms
         if (!agree) {
-            myAlertMessage('Вы должны согласиться с условиями обслуживания.');
-            return;
+            invalidMessage(checkBoxElement, 'Вы должны согласиться с условиями обслуживания.');
+            hasError = true;
         }
 
-        myAlertPopUp('На вашу почту выслана ссылка, перейдите по ней, чтобы завершить регистрацию');
-        form.reset();
+        if (!hasError) {
+          hasError = registerUser(fullName, email, username, password);
+            form.trigger('reset');
+        }
+
+        if (!hasError) {
+            myAlertPopUp('На вашу почту выслана ссылка для завершения регистрации');
+        }
+    }
+
+    function invalidMessage(element, message) {
+        if (element !== null) {
+            element.css({
+                borderColor: 'red',
+                marginBottom: '0'
+            }).next().text(message);
+        }
+    }
+
+    function registerUser(fullName, email, username, password) {
+
+        const newUser = {
+            fullName: fullName,
+            email: email,
+            username: username,
+            password: password
+        };
+
+        let clients = JSON.parse(localStorage.getItem('clients')) || [];
+
+        const userExists = clients.some(client => client.email === email || client.username === username);
+
+        if (userExists) {
+            myAlertMessage('Такой пользователь уже зарегистрирован');
+            return true;
+        }
+
+        clients.push(newUser);
+
+        localStorage.setItem('clients', JSON.stringify(clients));
+
+        console.log('User registered successfully:', newUser);
+        return false;
     }
 
     function alertButtonPopUp() {
-        myAlert.style.display = 'none';
+        myAlert.css('display', 'none');
         showSignInPage()
     }
 
     function myAlertPopUp(message) {
-        myAlert.style.display = 'flex';
-        alertText.innerText = message;
-        alertButton.addEventListener('click', alertButtonPopUp)
+        myAlert.css('display', 'flex');
+        alertText.text(message);
+        alertButton.on('click', alertButtonPopUp)
     }
 
     function myAlertMessage(message) {
-        myAlert.style.display = 'flex';
-        alertText.innerText = message;
-        alertButton.removeEventListener('click', alertButtonPopUp);
-        alertButton.addEventListener('click', alertButtonSimple)
+        myAlert.css('display', 'flex');
+        alertText.text(message);
+        alertButton.on('click', alertButtonPopUp);
+        alertButton.on('click', alertButtonSimple)
     }
 
     function alertButtonSimple() {
-        myAlert.style.display = 'none';
+        myAlert.css('display', 'none');
 
     }
-
-    linkAccount.addEventListener('click', e => {
+    function pageSignIn (e) {
         e.preventDefault();
         showSignInPage();
-    })
+    }
+
+    function pageReload (e){
+        e.preventDefault();
+        location.reload();
+    }
+
+    linkAccount.on('click', pageSignIn)
 
 
     function showSignInPage() {
 
-        document.getElementById('repeat-password-label').style.display = 'none';
-        document.getElementById('email-label').style.display = 'none';
-        document.getElementById('full-name-label').style.display = 'none';
-        document.getElementById('check-label').style.display = 'none';
-        document.getElementById('button').innerText = 'Sign In';
-        document.getElementById('form-info-title').innerText = 'Log in to the system';
-        linkAccount.style.display = 'none';
+        $('#repeat-password-label').css('display', 'none');
+        $('#email-label').css('display', 'none');
+        $('#full-name-label').css('display', 'none');
+        $('#check-label').css('display', 'none');
+        buttonElement.text('Sign In');
+        titleElement.text('Log in to the system');
+        linkAccount.on('click', pageReload);
+        linkAccount.text('Registration');
 
-        form.removeEventListener('submit', registerFormListener);
-        form.addEventListener('submit', authorizationFormListener);
+        regForm.each(function () {
+            $(this).css({
+                borderColor: '#C6C6C4',
+                marginBottom: '20px'
+            });
+        });
+
+        invalidFeedbackElement.each(function () {
+            $(this).text('');
+        });
+
+
+        form.on('submit', authorizationFormListener);
 
         function authorizationFormListener(event) {
             event.preventDefault();
-            const password = passwordElement.value.trim();
-            const username = usernameElement.value.trim();
+            const password = passwordElement.val().trim();
+            const username = usernameElement.val().trim();
+            let hasError = false;
+
+            regForm.each(function () {
+                $(this).css({
+                    borderColor: '#C6C6C4',
+                    marginBottom: '20px'
+                });
+            });
+
+            invalidFeedbackElement.each(function () {
+                $(this).text('');
+            });
 
 
             if (!username) {
-                myAlertMessage('Пожалуйста, введите имя пользователя.');
-                return;
+                invalidMessage(usernameElement, 'Пожалуйста, введите имя пользователя.');
+                hasError = true;
             }
 
             if (!password) {
-                myAlertMessage('Пожалуйста, введите пароль.');
-                return;
+                invalidMessage(passwordElement, 'Пожалуйста, введите пароль.');
+                hasError = true;
             }
 
-            myAlertMessage('Добро пожаловать, ' + username + '!')
+            let user;
+            if (!hasError) {
+              user = findObjectByName( JSON.parse(localStorage.getItem('clients')), username);
+              if (!user) {
+                  invalidMessage(usernameElement, 'Пользователь не зарегистрирован');
+                  return;
+              }
+              if (user.password !== password) {
+                  invalidMessage(passwordElement, 'Неверный пароль.');
+                  return;
+              }
+            }
+
+            if (!hasError) {
+               showPersonaAccount(user);
+            }
         }
+
+        function findObjectByName(list, username) {
+            return list.find((obj) => obj.username === username);
+        }
+    }
+    function showPersonaAccount (user) {
+        if (user) {
+        titleElement.text('Welcome, ' + user.fullName + '!');
+        $('#username-label').css('display', 'none');
+        $('#password-label').css('display', 'none');
+        linkAccount.css('display', 'none');
+        $('.form-info-text').css('display', 'none');
+        buttonElement.text('Exit').on('click', pageReload);
+
+    }
     }
 }
